@@ -1,56 +1,44 @@
-import React, { useState, useEffect } from "react";
+// Job.js
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+// import { fetchData } from "../../redux/jobSlice";
+import Card from "./Card.module";
+import { fetchData } from "../../redux/jobSlice";
+// import Card from "./Card";
 
-function Job() {
-  const [data, setData] = useState([]);
+function JobDetails() {
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchData = async () => {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      const body = JSON.stringify({
-        limit: 10,
-        offset: 0
-      });
-
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body
-      };
-
+    const fetchDataFromApi = async () => {
       try {
         const response = await fetch(
           "https://api.weekday.technology/adhoc/getSampleJdJSON",
-          requestOptions
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              limit: 10,
+              offset: 0
+            })
+          }
         );
         const result = await response.json();
-        console.log(result.jdList); // Log the jdList
-        setData(result.jdList); // Set the data
+        dispatch(fetchData(result.jdList));
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchData();
-  }, []);
- 
+    fetchDataFromApi();
+  }, [dispatch]);
 
   return (
     <div>
-      <h1>Sample Data</h1>
-      <ul>
-        {data.length > 0 ? (
-          <ul>
-            {data.map((item, index) => (
-              <li key={index}>{item.companyName}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>No data available</p>
-        )}
-      </ul>
+      <Card />
     </div>
   );
 }
 
-export default Job;
+export default JobDetails;
