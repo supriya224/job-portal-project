@@ -1,58 +1,78 @@
-import React from "react";
+// Input.module.js
+import React, { useState } from "react";
 import classNames from "classnames";
-import styles from "../pages/page.module.css";
+import styles from "./page.module.css";
+import { useSelector } from "react-redux";
+import { selectFilteredData } from "../redux/jobSlice";
 
-const Home = ({ filteredData }) => {
+const Card = () => {
+  const filteredData = useSelector(selectFilteredData);
+
+  const [expandedCards, setExpandedCards] = useState([]);
+
+  const handleExpand = (index) => {
+    setExpandedCards((prevExpanded) =>
+      prevExpanded.includes(index)
+        ? prevExpanded.filter((item) => item !== index)
+        : [...prevExpanded, index]
+    );
+  };
+
   return (
-    <div className={classNames(styles.card_container)}>
-      {filteredData.map((item, index) => (
-        <section key={index} className={classNames(styles.main_card_Section)}>
-          <div className={classNames(styles.main_card_page)}>
-            {/*  div with three cards */}
-            <div className={classNames(styles.main_card_items)}>
-              {/* card div with details */}
-              <div className={classNames(styles.card)}>
-                <div className={classNames(styles.card_items)}>
-                  {/* image with title */}
-                  <div className={classNames(styles.card_items_details)}>
-                    <div>
-                      <h4>{item.jobRole}</h4>
-                      <p>{item.companyName}</p>
-                      <p>{item.location}</p>
+    <div>
+      {/* Check if data exists, render UI, otherwise render null */}
+      {filteredData.length > 0 ? (
+        // main container
+        <div className={classNames(styles.card_container)}>
+          {/* get data from api */}
+          {filteredData.map((item, index) => (
+            <section key={index} className={classNames(styles.main_card_Section)}>
+              <div className={classNames(styles.main_card_page)}>
+                <div className={classNames(styles.main_card_items)}>
+                  <div className={classNames(styles.card)}>
+                    <div className={classNames(styles.card_items)}>
+                      <div className={classNames(styles.card_items_details)}>
+                        <div>
+                          <h4 className={classNames(styles.card_items_role)}>Job Role{item.jobRole}</h4>
+                          <p>{item.companyName}</p>
+                          <p>{item.location}</p>
+                        </div>
+                      </div>
+                      <p>
+                        Estimate salary {item.maxJdSalary}USD - {item.minJdSalary} USD
+                      </p>
+                      <div className={classNames(styles.card_items_data)}>
+                        <p>About company</p>
+                        <p className="">About us</p>
+                        <p className={classNames(styles.card_discription)}>
+                          {expandedCards.includes(index)
+                            ? item.jobDetailsFromCompany
+                            : `${item.jobDetailsFromCompany.slice(0, 400)}...`}
+                        </p>
+                        <button onClick={() => handleExpand(index)} className={classNames(styles.card_button_view)}>
+                          {expandedCards.includes(index) ? "View Less" : "View More"}
+                        </button>
+                      </div>
+                      <div className={classNames(styles.card_ex)}>
+                        Experience required
+                        <span>
+                          {item.maxExp} years - {item.minExp} years
+                        </span>
+                      </div>
+                      <div className={classNames(styles.card_button_items)}>
+                        <button className={classNames(styles.card_button_easy)}>Easy Apply</button>
+                        <button className={classNames(styles.card_button_refral)}>Unlock refrral asks</button>
+                      </div>
                     </div>
-                  </div>
-
-                  <p>Estimated salary: 18-15lpa</p>
-                </div>
-                <div className={classNames(styles.card_items_data)}>
-                  <p>About company</p>
-                  <p className="">About us</p>
-                  <p>{item.jobDetailsFromCompany}</p>
-                  <p>view job</p>
-                  <div className={classNames(styles.card_ex)}>
-                    minimum experience
-                    <span>
-                      {item.maxExp} - {item.minExp}{" "}
-                    </span>
-                  </div>
-
-                  {/* two button  */}
-                  <div className={classNames(styles.card_button_items)}>
-                    <button className={classNames(styles.card_button1)}>
-                      Easy Apply
-                    </button>
-                    <button className={classNames(styles.card_button2)}>
-                      Unlock refrral asks
-                    </button>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-      ))}
+            </section>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };
 
-export default Home;
+export default Card;

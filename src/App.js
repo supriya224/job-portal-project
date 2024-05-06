@@ -1,10 +1,10 @@
 import './App.css';
-import FetchDetails from './components/core/Fetch.Details';
+import { HomePage } from './pages/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <FetchDetails/>
+      <HomePage/>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+// FetchDetails.js
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Card from "./Input.module";
@@ -24,7 +25,6 @@ function FetchDetails() {
         );
         const result = await response.json();
         dispatch(fetchData(result.jdList));
-        console.log(result.jdList)
       } catch (error) {
         console.error(error);
       }
@@ -36,7 +36,7 @@ function FetchDetails() {
   return (
     <div>
       {/* card component imported here */}
-      <Card />
+      <Card/>
     </div>
   );
 }

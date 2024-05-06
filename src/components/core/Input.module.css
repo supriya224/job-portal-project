@@ -1,0 +1,21 @@
+/* Responsive Input Container */
+.input_container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 1rem;
+}
+.input_items {
+  padding: 10px 20px;
+  outline: none;
+  border: 1px solid gray;
+  border-radius: 4px;
+  width: calc(100% - 40px); /* Adjust width */
+  max-width: 15rem; /* Set maximum width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 1px 1px 0.5px rgb(129, 127, 127); 
+}
