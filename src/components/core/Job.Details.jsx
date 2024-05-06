@@ -1,13 +1,11 @@
-// Job.js
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { fetchData } from "../../redux/jobSlice";
 import Card from "./Card.module";
 import { fetchData } from "../../redux/jobSlice";
-// import Card from "./Card";
 
 function JobDetails() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); //useDispatch hooks 
+  // I have used useEffect for handling data
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
@@ -36,6 +34,7 @@ function JobDetails() {
 
   return (
     <div>
+      {/* card component imported here */}
       <Card />
     </div>
   );

@@ -2,7 +2,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filterData, selectData, selectFilteredData } from "../../redux/jobSlice";
-// import { filterData, selectData, selectFilteredData } from "../../redux/jobSlice";
 
 const Card = () => {
   const data = useSelector(selectData);
@@ -29,19 +28,19 @@ const Card = () => {
     <div>
       <ul>
         {filteredData.length > 0 ? (
-          <ul>
+          <div>
             <input placeholder="Search by company name" onChange={handleFilter} />
-            <input placeholder="Search by location" onChange={handleLocationFilter} />
+            <input placeholder="Search by location" onChange={handleLocationFilter} />  
             {filteredData.map((item, index) => (
               <div key={index}>
-                <li>{item.jobRole}</li>
-                <li>{item.companyName}</li>
-                <li>{item.location}</li>
-                <li>{item.maxExp}</li>
-                <li>{item.jobDetailsFromCompany}</li>
+                <p>{item.jobRole}</p>
+                <p>{item.companyName}</p>
+                <p>{item.location}</p>
+                <p>{item.maxExp}</p>
+                <p>{item.jobDetailsFromCompany}</p>
               </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>No data available</p>
         )}
