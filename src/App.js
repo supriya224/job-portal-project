@@ -1,11 +1,10 @@
 import './App.css';
-import JobDetails from './components/core/Job.Details';
-// import { HomePage } from './pages/HomePage';
+import FetchDetails from './components/core/Fetch.Details';
 
 function App() {
   return (
     <div className="App">
-      <JobDetails/>
+      <FetchDetails/>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Card from "./Card.module";
+import Card from "./Input.module";
 import { fetchData } from "../../redux/jobSlice";
 
-function JobDetails() {
+function FetchDetails() {
   const dispatch = useDispatch(); //useDispatch hooks 
   // I have used useEffect for handling data
   useEffect(() => {
@@ -24,6 +24,7 @@ function JobDetails() {
         );
         const result = await response.json();
         dispatch(fetchData(result.jdList));
+        console.log(result.jdList)
       } catch (error) {
         console.error(error);
       }
@@ -40,4 +41,4 @@ function JobDetails() {
   );
 }
 
-export default JobDetails;
+export default FetchDetails;

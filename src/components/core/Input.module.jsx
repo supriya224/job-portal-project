@@ -2,6 +2,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filterData, selectData, selectFilteredData } from "../../redux/jobSlice";
+import Home from "../Home";
 
 const Card = () => {
   const data = useSelector(selectData);
@@ -24,6 +25,29 @@ const Card = () => {
     dispatch(filterData(filteredData));
   };
 
+  const handleRoleFilter = (event) => {
+    const { value } = event.target;
+    const filteredData = data.filter((item) =>
+      item.jobRole.toLowerCase().includes(value.toLowerCase())
+    );
+    dispatch(filterData(filteredData));
+  };
+
+  const handleMinExpFilter = (event) => {
+    const { value } = event.target;
+    const filteredData = data.filter((item) =>
+      item.minExp.find().includes(value.toLowerCase())
+    );
+    dispatch(filterData(filteredData));
+  };
+  const handleminJdSalaryFilter = (event) => {
+    const { value } = event.target;
+    const filteredData = data.filter((item) =>
+      item.minExp.find().includes(value.toLowerCase())
+    );
+    dispatch(filterData(filteredData));
+  };
+// minJdSalary
   return (
     <div>
       <ul>
@@ -31,15 +55,10 @@ const Card = () => {
           <div>
             <input placeholder="Search by company name" onChange={handleFilter} />
             <input placeholder="Search by location" onChange={handleLocationFilter} />  
-            {filteredData.map((item, index) => (
-              <div key={index}>
-                <p>{item.jobRole}</p>
-                <p>{item.companyName}</p>
-                <p>{item.location}</p>
-                <p>{item.maxExp}</p>
-                <p>{item.jobDetailsFromCompany}</p>
-              </div>
-            ))}
+            <input placeholder="Search by role" onChange={handleRoleFilter} />
+            <input placeholder="Search by minExp" onChange={handleMinExpFilter} /> 
+            <input placeholder="Search by minJbsalary" onChange={ handleminJdSalaryFilter} /> 
+            <Home filteredData={filteredData}/>
           </div>
         ) : (
           <p>No data available</p>
