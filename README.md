@@ -2,6 +2,8 @@
 
 This is a job listing web application built using React and Redux. It allows users to browse through job listings, filter jobs based on various criteria, and apply for jobs easily.
 
+The website is live and accessible at [Job-portal-web-app](https://job-portal-project-rosy.vercel.app/).
+
 ## Features
 
 - View job listings
