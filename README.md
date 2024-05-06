@@ -42,6 +42,9 @@ The application uses the following API to fetch job listings:
     "offset": 0
   }
 
+##screenshot
+<img width="1440" alt="Screenshot 2024-05-06 at 10 54 59 PM" src="https://github.com/supriya224/job-portal-project/assets/52038704/9163eb61-aa3b-4d55-b337-461a0b1419a3">
+
 job-listing-app/
   ├── src/
   │   ├── components/
@@ -61,7 +64,3 @@ job-listing-app/
   │   ├── index.css            # Global styles
   │   └── index.js             # Application entry point
   └── README.md                # Project README file
-
-##screenshot is here
-<img width="1440" alt="Screenshot 2024-05-06 at 10 53 17 PM" src="https://github.com/supriya224/job-portal-project/assets/52038704/2f46b9d3-f8b8-41d8-be18-1e97b7217e79">
-
