@@ -10,6 +10,7 @@ const Card = () => {
   const [expandedCards, setExpandedCards] = useState([]);
   const [page, setPage] = useState(1);
 
+  // Function to handle card expansion
   const handleExpand = (index) => {
     setExpandedCards((prevExpanded) =>
       prevExpanded.includes(index)
@@ -18,6 +19,7 @@ const Card = () => {
     );
   };
 
+   // Function to handle scroll event for infinite scrolling
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
@@ -26,12 +28,12 @@ const Card = () => {
       setPage((prevPage) => prevPage + 1);
     }
   };
-
+  // Add scroll event listener when the component mounts
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+ // Fetch data from API when page changes
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {

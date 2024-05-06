@@ -13,10 +13,11 @@ import styles from "./Input.module.css";
 const Card = () => {
   const [minExpFilter, setMinExpFilter] = useState("");
   const [minJdSalaryFilter, setMinJdSalaryFilter] = useState("");
-  const data = useSelector(selectData);
-  const filteredData = useSelector(selectFilteredData);
-  const dispatch = useDispatch();
+  const data = useSelector(selectData); // Get the complete job data from Redux store
+  const filteredData = useSelector(selectFilteredData);// Get the filtered job data from Redux store
+  const dispatch = useDispatch(); // Get the dispatch function to dispatch actions to Redux store
 
+    // Function to filter data by company name
   const handleFilter = (event) => {
     const { value } = event.target;
     const filteredData = data.filter((item) =>
@@ -25,6 +26,7 @@ const Card = () => {
     dispatch(filterData(filteredData));
   };
 
+   // Function to filter data by location
   const handleLocationFilter = (event) => {
     const { value } = event.target;
     const filteredData = data.filter((item) =>
@@ -32,7 +34,7 @@ const Card = () => {
     );
     dispatch(filterData(filteredData));
   };
-
+ // Function to filter data by job role
   const handleRoleFilter = (event) => {
     const { value } = event.target;
     const filteredData = data.filter((item) =>
@@ -40,7 +42,7 @@ const Card = () => {
     );
     dispatch(filterData(filteredData));
   };
-
+ // Function to filter data by minimum experience
   const handleMinExpFilter = (event) => {
     const { value } = event.target;
     setMinExpFilter(value);
@@ -49,7 +51,7 @@ const Card = () => {
     );
     dispatch(filterData(filteredData));
   };
-
+  // Function to filter data by minimum JD salary
   const handleminJdSalaryFilter = (event) => {
     const { value } = event.target;
     setMinJdSalaryFilter(value);
