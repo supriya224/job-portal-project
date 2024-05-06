@@ -62,5 +62,6 @@ job-listing-app/
   │   └── index.js             # Application entry point
   └── README.md                # Project README file
 
-
+##screenshot is here
+<img width="1440" alt="Screenshot 2024-05-06 at 10 53 17 PM" src="https://github.com/supriya224/job-portal-project/assets/52038704/2f46b9d3-f8b8-41d8-be18-1e97b7217e79">
 
