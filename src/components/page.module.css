@@ -8,7 +8,7 @@
   max-width: 25rem;
   min-width: 20rem;
   height: auto;
-  background-color: rgb(242, 244, 244);
+  background-color: rgb(250, 250, 250);
   border-radius: 1rem;
   transition: all 3s;
 }
@@ -52,7 +52,7 @@
   width: 100%;
   padding: 0.4rem 1rem;
   border-radius: 0.5rem;
-  background-color: rgb(89, 88, 88);
+  background-color: rgb(42, 108, 179);
   color: white;
   cursor: pointer;
 
