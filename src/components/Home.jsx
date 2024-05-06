@@ -1,14 +1,14 @@
-// Input.module.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import styles from "./page.module.css";
-import { useSelector } from "react-redux";
-import { selectFilteredData } from "../redux/jobSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectFilteredData, fetchData } from "../redux/jobSlice";
 
 const Card = () => {
+  const dispatch = useDispatch();
   const filteredData = useSelector(selectFilteredData);
-
   const [expandedCards, setExpandedCards] = useState([]);
+  const [page, setPage] = useState(1);
 
   const handleExpand = (index) => {
     setExpandedCards((prevExpanded) =>
@@ -17,6 +17,47 @@ const Card = () => {
         : [...prevExpanded, index]
     );
   };
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const fetchDataFromApi = async () => {
+      try {
+        const response = await fetch(
+          "https://api.weekday.technology/adhoc/getSampleJdJSON",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              limit: 10,
+              offset: (page - 1) * 40
+            })
+          }
+        );
+        const result = await response.json();
+        dispatch(fetchData(result.jdList));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchDataFromApi();
+  }, [dispatch, page]);
+
   return (
     <div>
       {/* Check if data exists, render UI, otherwise render null */}

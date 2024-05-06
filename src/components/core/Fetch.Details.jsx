@@ -1,11 +1,27 @@
-// FetchDetails.js
-import React, { useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Card from "./Input.module";
 import { fetchData } from "../../redux/jobSlice";
 
 function FetchDetails() {
-  const dispatch = useDispatch(); //useDispatch hooks 
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch(); // useDispatch hooks
+
+  // handle infinite scroll here
+  const handleInfiniteScroll = async () => {
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        setPage((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.log("Error ");
+    }
+  };
+
   // I have used useEffect for handling data
   useEffect(() => {
     const fetchDataFromApi = async () => {
@@ -18,8 +34,8 @@ function FetchDetails() {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              limit: 10,
-              offset: 0
+              limit: 40,
+              offset: (page - 1) * 40
             })
           }
         );
@@ -31,12 +47,17 @@ function FetchDetails() {
     };
 
     fetchDataFromApi();
-  }, [dispatch]);
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleInfiniteScroll);
+    return () => window.removeEventListener("scroll", handleInfiniteScroll);
+  }, [handleInfiniteScroll]);
 
   return (
     <div>
       {/* card component imported here */}
-      <Card/>
+      <Card />
     </div>
   );
 }
