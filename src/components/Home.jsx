@@ -17,7 +17,6 @@ const Card = () => {
         : [...prevExpanded, index]
     );
   };
-
   return (
     <div>
       {/* Check if data exists, render UI, otherwise render null */}
@@ -26,42 +25,53 @@ const Card = () => {
         <div className={classNames(styles.card_container)}>
           {/* get data from api */}
           {filteredData.map((item, index) => (
-            <section key={index} className={classNames(styles.main_card_Section)}>
+            <section
+              key={index}
+              className={classNames(styles.main_card_Section)}>
               <div className={classNames(styles.main_card_page)}>
                 <div className={classNames(styles.main_card_items)}>
                   <div className={classNames(styles.card)}>
                     <div className={classNames(styles.card_items)}>
                       <div className={classNames(styles.card_items_details)}>
                         <div>
-                          <h4 className={classNames(styles.card_items_role)}>Job Role{item.jobRole}</h4>
-                          <p>{item.companyName}</p>
-                          <p>{item.location}</p>
+                          <h4 className={classNames(styles.card_items_role)}>
+                            Job Role {item.jobRole}
+                          </h4>
+                          <p>Compnay Name: {item.companyName}</p>
+                          <p>Location: {item.location}</p>
+                          <p>
+                            Estimate salary: {item.maxJdSalary}USD -
+                            {item.minJdSalary} USD
+                          </p>
+                          <p className={classNames(styles.card_experience)}>
+                            Experience required:
+                            <span>
+                              {item.maxExp} - {item.minExp} years
+                            </span>
+                          </p>
                         </div>
                       </div>
-                      <p>
-                        Estimate salary {item.maxJdSalary}USD - {item.minJdSalary} USD
-                      </p>
+
                       <div className={classNames(styles.card_items_data)}>
                         <p>About company</p>
-                        <p className="">About us</p>
                         <p className={classNames(styles.card_discription)}>
                           {expandedCards.includes(index)
                             ? item.jobDetailsFromCompany
                             : `${item.jobDetailsFromCompany.slice(0, 400)}...`}
                         </p>
-                        <button onClick={() => handleExpand(index)} className={classNames(styles.card_button_view)}>
-                          {expandedCards.includes(index) ? "View Less" : "View More"}
+                        <button
+                          onClick={() => handleExpand(index)}
+                          className={classNames(styles.card_button_view)}>
+                          {expandedCards.includes(index)
+                            ? "View Less"
+                            : "View More"}
                         </button>
                       </div>
-                      <div className={classNames(styles.card_ex)}>
-                        Experience required
-                        <span>
-                          {item.maxExp} years - {item.minExp} years
-                        </span>
-                      </div>
+
                       <div className={classNames(styles.card_button_items)}>
-                        <button className={classNames(styles.card_button_easy)}>Easy Apply</button>
-                        <button className={classNames(styles.card_button_refral)}>Unlock refrral asks</button>
+                        <button className={classNames(styles.card_button_easy)}>
+                          Easy Apply
+                        </button>
                       </div>
                     </div>
                   </div>

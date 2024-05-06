@@ -1,5 +1,5 @@
 // Card.js
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   filterData,
@@ -11,6 +11,8 @@ import classNames from "classnames";
 import styles from "./Input.module.css";
 
 const Card = () => {
+  const [minExpFilter, setMinExpFilter] = useState("");
+  const [minJdSalaryFilter, setMinJdSalaryFilter] = useState("");
   const data = useSelector(selectData);
   const filteredData = useSelector(selectFilteredData);
   const dispatch = useDispatch();
@@ -41,15 +43,18 @@ const Card = () => {
 
   const handleMinExpFilter = (event) => {
     const { value } = event.target;
+    setMinExpFilter(value);
     const filteredData = data.filter((item) =>
-      item.minExp.find().includes(value.toLowerCase())
+      item.minExp >= parseInt(value)
     );
     dispatch(filterData(filteredData));
   };
+
   const handleminJdSalaryFilter = (event) => {
     const { value } = event.target;
+    setMinJdSalaryFilter(value);
     const filteredData = data.filter((item) =>
-      item.minExp.find().includes(value.toLowerCase())
+      item.minJdSalary >= parseInt(value)
     );
     dispatch(filterData(filteredData));
   };
@@ -60,6 +65,7 @@ const Card = () => {
         {filteredData.length > 0 ? (
           <>
             <div className={classNames(styles.input_container)}>
+              {/* seacrh by */}
               <input
                 placeholder="Search by company name"
                 onChange={handleFilter}
@@ -74,11 +80,13 @@ const Card = () => {
               <input
                 placeholder="Search by Min experience"
                 onChange={handleMinExpFilter}
+                value={minExpFilter}
                 className={classNames(styles.input_items)}
               />
               <input
                 placeholder="Search by Min Salary"
                 onChange={handleminJdSalaryFilter}
+                value={minJdSalaryFilter}
                 className={classNames(styles.input_items)}
               />
             </div>
