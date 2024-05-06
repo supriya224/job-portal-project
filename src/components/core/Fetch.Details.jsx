@@ -6,7 +6,7 @@ import { fetchData } from "../../redux/jobSlice";
 
 function FetchDetails() {
   const [page, setPage] = useState(1);
-  const dispatch = useDispatch(); // useDispatch hooks
+  const dispatch = useDispatch(); 
 
   // handle infinite scroll here
   const handleInfiniteScroll = async () => {

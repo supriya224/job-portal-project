@@ -44,7 +44,7 @@ const Card = () => {
             },
             body: JSON.stringify({
               limit: 10,
-              offset: (page - 1) * 40
+              offset: (page - 1) * 10
             })
           }
         );
@@ -63,30 +63,29 @@ const Card = () => {
       {/* Check if data exists, render UI, otherwise render null */}
       {filteredData.length > 0 ? (
         // main container
-        <div className={classNames(styles.card_container)}>
+        <div className={classNames(styles.card_container,"flex", "flex-centred ")}>
           {/* get data from api */}
           {filteredData.map((item, index) => (
             <section
               key={index}
               className={classNames(styles.main_card_Section)}>
-              <div className={classNames(styles.main_card_page)}>
+              <div className={classNames(styles.main_card_page,"shadow")}>
                 <div className={classNames(styles.main_card_items)}>
                   <div className={classNames(styles.card)}>
                     <div className={classNames(styles.card_items)}>
-                      <div className={classNames(styles.card_items_details)}>
+                      <div className={classNames(styles.card_items_details,"flex-centerd")}>
                         <div>
-                          <h4 className={classNames(styles.card_items_role)}>
-                            Job Role {item.jobRole}
+                          <h4 className={classNames("font")}>
+                            Job Role: <span  className={classNames("span")}>{item.jobRole}</span> 
                           </h4>
-                          <p>Compnay Name: {item.companyName}</p>
-                          <p>Location: {item.location}</p>
-                          <p>
-                            Estimate salary: {item.maxJdSalary}USD -
+                          <p className={classNames("font")}>Company: <span className={classNames("span")}>{item.companyName}</span> </p>
+                          <p className={classNames("font")}>Location:  <span  className={classNames("span")}> {item.location}</span> </p>
+                          <p className={classNames("text")}>
+                            Estimate salary: {item.maxJdSalary} USD -
                             {item.minJdSalary} USD
                           </p>
-                          <p className={classNames(styles.card_experience)}>
-                            Experience required:
-                            <span>
+                          <p className={classNames("text")}>
+                            Experience:      <span>
                               {item.maxExp} - {item.minExp} years
                             </span>
                           </p>
@@ -94,7 +93,7 @@ const Card = () => {
                       </div>
 
                       <div className={classNames(styles.card_items_data)}>
-                        <p>About company</p>
+                        <p  className={classNames("font")}>About company</p>
                         <p className={classNames(styles.card_discription)}>
                           {expandedCards.includes(index)
                             ? item.jobDetailsFromCompany
@@ -102,7 +101,7 @@ const Card = () => {
                         </p>
                         <button
                           onClick={() => handleExpand(index)}
-                          className={classNames(styles.card_button_view)}>
+                          className={classNames(styles.card_button_view,"flex","field")}>
                           {expandedCards.includes(index)
                             ? "View Less"
                             : "View More"}
@@ -110,7 +109,7 @@ const Card = () => {
                       </div>
 
                       <div className={classNames(styles.card_button_items)}>
-                        <button className={classNames(styles.card_button_easy)}>
+                        <button className={classNames(styles.card_button_easy,"shadow","field","font")}>
                           Easy Apply
                         </button>
                       </div>

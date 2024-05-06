@@ -1,7 +1,6 @@
 import React from "react";
 // import classNames from "classnames";
 import styles from "./header.module.css";
-import Link from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -14,7 +13,7 @@ const Header = () => {
           alt=""
         />
       </div>
-      <h4>   Job portal Assignment</h4>
+      <h4>Job portal Assignment</h4>
    
     </header>
   );

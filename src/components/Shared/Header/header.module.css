@@ -1,11 +1,12 @@
 /* Header.module.css */
 .header {
-    background-color: #6e6e6e;
-    color: white;
+    background-color: #9e9f9f;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  box-shadow: 2px 0px 5px 0.5px rgb(129, 127, 127);
+
   }
   
   /* Media Query for Responsive Design */
